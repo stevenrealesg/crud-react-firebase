@@ -1,0 +1,2 @@
+Amplify: https://main.d52d79w7b9q0f.amplifyapp.com/
+Netlify: https://crud-basic.netlify.app/
