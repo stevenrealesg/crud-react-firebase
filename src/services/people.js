@@ -17,8 +17,18 @@ const save = async (person) => {
         await db.collection('people').add(person)
         return true
     } catch (error) {
-        console.log("Error guardar persona", error)
+        console.log("Error al guardar persona", error)
     }
 }
 
-export { getList, save }
+const remove = async (id) => {
+    try {
+        const db = firebase.firestore()
+        await db.collection('people').doc(id).delete()
+        return true
+    } catch (error) {
+        console.log("Error al eliminar persona", error)
+    }
+}
+
+export { getList, save, remove }

@@ -119,7 +119,7 @@ function Form() {
                                     <option defaultValue></option>
                                     <option value="teacher">Profesor</option>
                                     <option value="student">Estudiante</option>
-                                    <option value="student">Asistente</option>
+                                    <option value="assistant">Asistente</option>
                                 </select>
                             </div>
                         </div>

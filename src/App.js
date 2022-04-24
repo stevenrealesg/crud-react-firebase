@@ -1,17 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Form from './components/Form';
 import Person from './components/Person';
-import { getList } from './services/people';
+import { getList, remove } from './services/people';
 
 function App() {
+  const [people, setPeople] = useState([])
+
+  const handleClickDelete = async (id) => {
+    await remove(id)
+  }
+  const handleClickEdit = (data) => {
+    console.log("Editar:", data)
+  }
+
   const getPeople = async () => {
     const data = await getList()
-    console.log(data)
+    setPeople(data)
   }
 
   useEffect(() => {
-    getPeople()
+    if (people) {
+      getPeople()
+    }
   }, [])
   return (
     <div className="container">
@@ -26,9 +37,17 @@ function App() {
         <h4><i className="bi bi-person-lines-fill"></i> Listado de personas</h4>
       </div>
       <div className='row'>
-        <div className='col-md-4'>
-          <Person />
-        </div>
+        {
+          people.map(person => (
+            <div key={person.id} className='col-md-4'>
+              <Person
+                data={person}
+                handleClickEdit={() => handleClickEdit(person)}
+                handleClickDelete={() => handleClickDelete(person.id)}
+              />
+            </div>
+          ))
+        }
       </div>
     </div>
   );
