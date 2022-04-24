@@ -31,4 +31,14 @@ const remove = async (id) => {
     }
 }
 
-export { getList, save, remove }
+const update = async (id, data) => {
+    try {
+        const db = firebase.firestore()
+        await db.collection('people').doc(id).update(data)
+        return true
+    } catch (error) {
+        console.log("Error al actualizar persona", error)
+    }
+}
+
+export { getList, save, remove, update }

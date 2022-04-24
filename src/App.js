@@ -6,12 +6,14 @@ import { getList, remove } from './services/people';
 
 function App() {
   const [people, setPeople] = useState([])
+  const [personUpdate, setPersonUpdate] = useState(null)
 
   const handleClickDelete = async (id) => {
     await remove(id)
+    getPeople()
   }
   const handleClickEdit = (data) => {
-    console.log("Editar:", data)
+    setPersonUpdate(data)
   }
 
   const getPeople = async () => {
@@ -30,7 +32,7 @@ function App() {
         <h3><i className="bi bi-server"></i> Gestión de personal universitario</h3>
       </div>
       <div className='row mb-3'>
-        <Form />
+        <Form personUpdate={personUpdate} setPersonUpdate={setPersonUpdate} getPeople={getPeople}/>
       </div>
       <hr className='border border-dark my-4' />
       <div className='row mb-3'>
